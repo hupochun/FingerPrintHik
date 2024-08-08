@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="icon/icon.qrc">
-    <normaloff>:/微信图片_20240728123250.png</normaloff>:/微信图片_20240728123250.png</iconset>
+    <normaloff>:/ico.png</normaloff>:/ico.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">

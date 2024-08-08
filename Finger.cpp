@@ -72,7 +72,7 @@ Finger::Finger(QWidget *parent)
     FPModule_SetTimeout(5);
     Prompt=new Dialog;
     networkManager = new QNetworkAccessManager(this);
-    QUrl url(IPAddress+"/api/gwise-hik/hik-fingerprint/list?personId="+UserID);
+    QUrl url(IPAddress+"/gwise-hik/hik-fingerprint/list?personId="+UserID);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
@@ -151,14 +151,21 @@ void Finger::on_pushButton_released()
             return;
         }
         Prompt->close();
-        QUrl url(IPAddress+"/api/gwise-hik/hik-fingerprint");
+        QUrl url(IPAddress+"/gwise-hik/hik-fingerprint");
         QNetworkRequest request(url);
         QJsonObject json;
-        QString hexString;
-        for (int i = 0; i < 512; ++i) {
-            // Convert each byte to a 2-character hexadecimal string
-            hexString.append(QString("%1").arg(fpTemplate[i], 2, 16, QChar('0')).toUpper());
-        }
+        // QString hexString;
+        // for (int i = 0; i < 512; ++i) {
+        //     // Convert each byte to a 2-character hexadecimal string
+        //     hexString.append(QString("%1").arg(fpTemplate[i], 2, 16, QChar('0')).toUpper());
+        // }
+        QByteArray byteArray(reinterpret_cast<char*>(fpTemplate), 512);
+
+        // 2. 将 QByteArray 转换为 Base64 编码的 QByteArray
+        QByteArray base64Data = byteArray.toBase64();
+
+        // 3. 将 Base64 编码的 QByteArray 转换为 QString，如果需要的话
+        QString hexString = QString::fromUtf8(base64Data);
             json["personId"] = UserID;
             QDateTime currentDateTime = QDateTime::currentDateTime();
             json["fingerprintName"] = currentDateTime.toString();
@@ -186,7 +193,7 @@ void Finger::on_pushButton_released()
             }
         });
             // networkManager=new QNetworkAccessManager(this);
-            // QUrl urlflash(IPAddress+"/api/gwise-hik/hik-fingerprint/list?personId="+UserID);
+            // QUrl urlflash(IPAddress+"/gwise-hik/hik-fingerprint/list?personId="+UserID);
             // QNetworkRequest requestflash(urlflash);
             // requestflash.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
             // requestflash.setRawHeader("Connection", "Keep-Alive");
@@ -273,13 +280,20 @@ void Finger::on_pushButton_2_released()
             return;
         }
         Prompt->close();
-        QString hexString;
-        for (int i = 0; i < 512; ++i) {
-            // Convert each byte to a 2-character hexadecimal string
-            hexString.append(QString("%1").arg(fpTemplate[i], 2, 16, QChar('0')).toUpper());
-        }
+        // QString hexString;
+        // for (int i = 0; i < 512; ++i) {
+        //     // Convert each byte to a 2-character hexadecimal string
+        //     hexString.append(QString("%1").arg(fpTemplate[i], 2, 16, QChar('0')).toUpper());
+        // }
+        QByteArray byteArray(reinterpret_cast<char*>(fpTemplate), 512);
+
+        // 2. 将 QByteArray 转换为 Base64 编码的 QByteArray
+        QByteArray base64Data = byteArray.toBase64();
+
+        // 3. 将 Base64 编码的 QByteArray 转换为 QString，如果需要的话
+        QString hexString = QString::fromUtf8(base64Data);
         networkManager=new QNetworkAccessManager(this);
-        QUrl url(IPAddress+"/api/gwise-hik/hik-fingerprint");
+        QUrl url(IPAddress+"/gwise-hik/hik-fingerprint");
         QNetworkRequest request(url);
         QJsonObject json;
             json["fingerprintId"] = FingerID;
@@ -317,7 +331,7 @@ void Finger::on_pushButton_2_released()
 void Finger::FlashTable()
 {
     QNetworkAccessManager* FlashNetworkManager=new QNetworkAccessManager(this);
-    QUrl urlflash(IPAddress+"/api/gwise-hik/hik-fingerprint/list?personId="+UserID);
+    QUrl urlflash(IPAddress+"/gwise-hik/hik-fingerprint/list?personId="+UserID);
     QNetworkRequest requestflash(urlflash);
     QNetworkReply* replyflash;
     requestflash.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

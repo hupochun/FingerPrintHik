@@ -19,7 +19,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I..\..\..\FingerMSVC -I. -I..\..\..\FingerMSVC -IG:\Qt\5.15.2\msvc2019\include -IG:\Qt\5.15.2\msvc2019\include\QtWidgets -IG:\Qt\5.15.2\msvc2019\include\QtGui -IG:\Qt\5.15.2\msvc2019\include\QtANGLE -IG:\Qt\5.15.2\msvc2019\include\QtNetwork -IG:\Qt\5.15.2\msvc2019\include\QtCore -Idebug -I. -I/include -IG:\Qt\5.15.2\msvc2019\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:F:\WangLingZhi\FingerMSVC F:\WangLingZhi\FingerMSVC\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib  G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib /LIBPATH:C:\opensslx86\lib /LIBPATH:C:\Utils\my_sql\mysql-5.7.25-win32\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib 
+LIBS          = /LIBPATH:F:\WangLingZhi\FingerMSVC F:\WangLingZhi\FingerMSVC\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib debug\FingerMSVC_resource.res  G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib /LIBPATH:C:\opensslx86\lib /LIBPATH:C:\Utils\my_sql\mysql-5.7.25-win32\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib 
 QMAKE         = G:\Qt\5.15.2\msvc2019\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\FingerMSVC_resource.res
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -159,11 +159,14 @@ DESTDIR_TARGET = debug\FingerMSVC.exe
 first: all
 all: Makefile.Debug  debug\FingerMSVC.exe
 
-debug\FingerMSVC.exe: F:\WangLingZhi\FingerMSVC\.\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib ui_Finger.h ui_Login.h ui_Setting.h ui_dialog.h ui_mainwindow.h $(OBJECTS) 
+debug\FingerMSVC.exe: F:\WangLingZhi\FingerMSVC\.\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib ui_Finger.h ui_Login.h ui_Setting.h ui_dialog.h ui_mainwindow.h $(OBJECTS) debug\FingerMSVC_resource.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
 debug\Finger.obj debug\Login.obj debug\Setting.obj debug\dialog.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_dialog.obj debug\moc_mainwindow.obj
 $(LIBS)
 <<
+
+debug\FingerMSVC_resource.res: FingerMSVC_resource.rc
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\FingerMSVC_resource.res FingerMSVC_resource.rc
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\FingerMSVC.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -176,6 +179,7 @@ dist:
 clean: compiler_clean 
 	-$(DEL_FILE) debug\Finger.obj debug\Login.obj debug\Setting.obj debug\dialog.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_dialog.obj debug\moc_mainwindow.obj
 	-$(DEL_FILE) debug\FingerMSVC.vc.pdb debug\FingerMSVC.ilk debug\FingerMSVC.idb
+	-$(DEL_FILE) debug\FingerMSVC_resource.res
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\FingerMSVC.pdb
@@ -197,10 +201,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_icon.cpp
 debug\qrc_icon.cpp: ..\..\icon\icon.qrc \
 		G:\Qt\5.15.2\msvc2019\bin\rcc.exe \
+		..\..\icon\ico.png \
 		..\..\icon\weixiao.png \
 		..\..\icon\sangangy.png \
-		..\..\icon\suo.png \
-		..\..\icon\????_20240728123250.png
+		..\..\icon\suo.png
 	G:\Qt\5.15.2\msvc2019\bin\rcc.exe -name icon ..\..\icon\icon.qrc -o debug\qrc_icon.cpp
 
 compiler_moc_predefs_make_all: debug\moc_predefs.h
@@ -1433,6 +1437,33 @@ debug\Setting.obj: ..\..\Setting.cpp ..\..\Setting.h \
 		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
 		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
 		ui_Setting.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QApplication \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qeventloop.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdesktopwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qguiapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qinputmethod.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QGridLayout \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qgridlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayoutitem.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qboxlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLabel \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlabel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qframe.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLineEdit \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlineedit.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpen.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextoption.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QPushButton \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qpushbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qicon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QSpacerItem \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\qsettings.h
 
 debug\dialog.obj: ..\..\dialog.cpp ..\..\dialog.h \

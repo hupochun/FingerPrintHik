@@ -37,7 +37,7 @@ void Login::on_pushButton_released()
     {
         QMessageBox::StandardButton result=QMessageBox::warning(this, "错误","账号或密码不能为空");
     }
-    QUrl url(IPAddress+"/api/auth/login");
+    QUrl url(IPAddress+"/auth/login");
     QNetworkRequest request(url);
     QJsonObject json;
     json["username"] = User;
@@ -48,7 +48,6 @@ void Login::on_pushButton_released()
     request.setRawHeader("Connection", "Keep-Alive");
     reply=networkManager->post(request, jsonData);
     qDebug()<<jsonData;
-
 }
 
 void Login::replyFinished()

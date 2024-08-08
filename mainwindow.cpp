@@ -12,12 +12,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("指纹录入工具");
+
     networkManager = new QNetworkAccessManager(this);
-    QUrl url(IPAddress+"/api/system/user/dynamicList?pageNum=1&pageSize=30&sortField=&sortType=");
+    QUrl url(IPAddress+"/system/user/dynamicList?pageNum=1&pageSize=30&sortField=&sortType=");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
     request.setRawHeader("Authorization", QString("Bearer %1").arg(Token).toUtf8());
+
     //do{
         reply=networkManager->get(request);
     // 处理HTTP响应
@@ -112,7 +114,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_3_released()
 {
-    QUrl url(QString(IPAddress+"/api/system/user/dynamicList?pageNum=1&pageSize=30&nickName=%1&sortField=&sortType=").arg(ui->lineEdit->text()));
+    QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=1&pageSize=30&nickName=%1&sortField=&sortType=").arg(ui->lineEdit->text()));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
@@ -205,7 +207,7 @@ void MainWindow::on_pushButton_4_released()
         return;
     PageNum++;
     ui->lineEdit_2->setText(QString::number(PageNum));
-    QUrl url(QString(IPAddress+"/api/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
+    QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
@@ -297,7 +299,7 @@ void MainWindow::on_pushButton_5_released()
         return;
     PageNum--;
     ui->lineEdit_2->setText(QString::number(PageNum));
-    QUrl url(QString(IPAddress+"/api/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
+    QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
@@ -387,7 +389,8 @@ void MainWindow::on_pushButton_5_released()
 void MainWindow::on_pushButton_6_released()
 {
     QModelIndex currentIndex = ui->tableWidget->currentIndex();
-    if (currentIndex.isValid()) {
+    if (currentIndex.isValid())
+    {
         int currentRow = ui->tableWidget->currentIndex().row();
         UserID=ui->tableWidget->item(currentRow,0)->text();
         Finger* FingerWidget= new Finger(this);
@@ -403,7 +406,7 @@ void MainWindow::on_pushButton_6_released()
 void MainWindow::on_pushButton_released()
 {
     PageNum=ui->lineEdit_2->text().toInt();
-    QUrl url(QString(IPAddress+"/api/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
+    QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Connection", "Keep-Alive");
