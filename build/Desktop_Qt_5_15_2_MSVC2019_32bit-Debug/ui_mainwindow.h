@@ -30,15 +30,16 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_6;
-    QLabel *label;
-    QTableWidget *tableWidget;
     QPushButton *pushButton;
+    QPushButton *pushButton_6;
     QPushButton *pushButton_4;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit;
+    QTableWidget *tableWidget;
     QPushButton *pushButton_3;
+    QLabel *label;
+    QLineEdit *lineEdit_2;
+    QPushButton *pushButton_5;
+    QLineEdit *lineEdit;
+    QPushButton *pushButton_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -54,41 +55,46 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        pushButton_5 = new QPushButton(centralwidget);
-        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
-        gridLayout->addWidget(pushButton_5, 2, 6, 1, 1);
+        gridLayout->addWidget(pushButton, 2, 8, 1, 1);
 
         pushButton_6 = new QPushButton(centralwidget);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
 
         gridLayout->addWidget(pushButton_6, 2, 1, 1, 1);
 
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
+        pushButton_4 = new QPushButton(centralwidget);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
 
-        gridLayout->addWidget(label, 0, 1, 1, 1);
+        gridLayout->addWidget(pushButton_4, 2, 9, 1, 1);
 
         tableWidget = new QTableWidget(centralwidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
 
         gridLayout->addWidget(tableWidget, 1, 1, 1, 9);
 
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton_3 = new QPushButton(centralwidget);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
 
-        gridLayout->addWidget(pushButton, 2, 8, 1, 1);
+        gridLayout->addWidget(pushButton_3, 0, 3, 1, 1);
 
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addWidget(pushButton_4, 2, 9, 1, 1);
+        gridLayout->addWidget(label, 0, 1, 1, 1);
 
         lineEdit_2 = new QLineEdit(centralwidget);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
         lineEdit_2->setMaximumSize(QSize(30, 16777215));
 
         gridLayout->addWidget(lineEdit_2, 2, 7, 1, 1);
+
+        pushButton_5 = new QPushButton(centralwidget);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+
+        gridLayout->addWidget(pushButton_5, 2, 6, 1, 1);
 
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
@@ -97,10 +103,11 @@ public:
 
         gridLayout->addWidget(lineEdit, 0, 2, 1, 1);
 
-        pushButton_3 = new QPushButton(centralwidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_2 = new QPushButton(centralwidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setMaximumSize(QSize(100, 16777215));
 
-        gridLayout->addWidget(pushButton_3, 0, 3, 1, 1);
+        gridLayout->addWidget(pushButton_2, 2, 3, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -119,12 +126,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("MainWindow", "\344\270\212\344\270\200\351\241\265", nullptr));
-        pushButton_6->setText(QCoreApplication::translate("MainWindow", "\347\274\226\350\276\221\346\214\207\347\272\271", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "\347\224\250\346\210\267\345\247\223\345\220\215", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\350\267\263\350\275\254", nullptr));
+        pushButton_6->setText(QCoreApplication::translate("MainWindow", "\347\274\226\350\276\221\346\214\207\347\272\271", nullptr));
         pushButton_4->setText(QCoreApplication::translate("MainWindow", "\344\270\213\344\270\200\351\241\265", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "\346\220\234\347\264\242", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "\347\224\250\346\210\267\345\247\223\345\220\215", nullptr));
+        pushButton_5->setText(QCoreApplication::translate("MainWindow", "\344\270\212\344\270\200\351\241\265", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "\346\267\273\345\212\240\351\227\250\347\246\201", nullptr));
     } // retranslateUi
 
 };
