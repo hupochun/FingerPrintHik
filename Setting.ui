@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icon/icon.qrc">
+    <normaloff>:/ico.png</normaloff>:/ico.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="3">
     <spacer name="verticalSpacer_3">
@@ -140,6 +144,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="icon/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

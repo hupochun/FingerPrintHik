@@ -19,7 +19,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I..\..\..\FingerMSVC -I. -I..\..\..\FingerMSVC -IG:\Qt\5.15.2\msvc2019\include -IG:\Qt\5.15.2\msvc2019\include\QtWidgets -IG:\Qt\5.15.2\msvc2019\include\QtGui -IG:\Qt\5.15.2\msvc2019\include\QtANGLE -IG:\Qt\5.15.2\msvc2019\include\QtNetwork -IG:\Qt\5.15.2\msvc2019\include\QtCore -Idebug -I. -I/include -IG:\Qt\5.15.2\msvc2019\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:F:\WangLingZhi\FingerMSVC F:\WangLingZhi\FingerMSVC\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib  G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib /LIBPATH:C:\opensslx86\lib /LIBPATH:C:\Utils\my_sql\mysql-5.7.25-win32\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib 
+LIBS          = /LIBPATH:F:\WangLingZhi\FingerMSVC F:\WangLingZhi\FingerMSVC\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib debug\FingerMSVC_resource.res  G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib /LIBPATH:C:\opensslx86\lib /LIBPATH:C:\Utils\my_sql\mysql-5.7.25-win32\lib /LIBPATH:C:\Utils\postgresqlx86\pgsql\lib shell32.lib 
 QMAKE         = G:\Qt\5.15.2\msvc2019\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\FingerMSVC_resource.res
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -53,36 +53,48 @@ OBJECTS_DIR   = debug
 SOURCES       = ..\..\Finger.cpp \
 		..\..\Login.cpp \
 		..\..\Setting.cpp \
+		..\..\addlock.cpp \
 		..\..\dialog.cpp \
+		..\..\getlock.cpp \
 		..\..\main.cpp \
 		..\..\mainwindow.cpp debug\qrc_icon.cpp \
 		debug\moc_Finger.cpp \
 		debug\moc_Login.cpp \
 		debug\moc_Setting.cpp \
+		debug\moc_addlock.cpp \
 		debug\moc_dialog.cpp \
+		debug\moc_getlock.cpp \
 		debug\moc_mainwindow.cpp
 OBJECTS       = debug\Finger.obj \
 		debug\Login.obj \
 		debug\Setting.obj \
+		debug\addlock.obj \
 		debug\dialog.obj \
+		debug\getlock.obj \
 		debug\main.obj \
 		debug\mainwindow.obj \
 		debug\qrc_icon.obj \
 		debug\moc_Finger.obj \
 		debug\moc_Login.obj \
 		debug\moc_Setting.obj \
+		debug\moc_addlock.obj \
 		debug\moc_dialog.obj \
+		debug\moc_getlock.obj \
 		debug\moc_mainwindow.obj
 
 DIST          =  ..\..\FPModule_SDK.h \
 		..\..\Finger.h \
 		..\..\Login.h \
 		..\..\Setting.h \
+		..\..\addlock.h \
 		..\..\dialog.h \
+		..\..\getlock.h \
 		..\..\mainwindow.h ..\..\Finger.cpp \
 		..\..\Login.cpp \
 		..\..\Setting.cpp \
+		..\..\addlock.cpp \
 		..\..\dialog.cpp \
+		..\..\getlock.cpp \
 		..\..\main.cpp \
 		..\..\mainwindow.cpp
 QMAKE_TARGET  = FingerMSVC
@@ -159,11 +171,14 @@ DESTDIR_TARGET = debug\FingerMSVC.exe
 first: all
 all: Makefile.Debug  debug\FingerMSVC.exe
 
-debug\FingerMSVC.exe: F:\WangLingZhi\FingerMSVC\.\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib ui_Finger.h ui_Login.h ui_Setting.h ui_dialog.h ui_mainwindow.h $(OBJECTS) 
+debug\FingerMSVC.exe: F:\WangLingZhi\FingerMSVC\.\FPModule_SDK.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.lib G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.lib G:\Qt\5.15.2\msvc2019\lib\qtmaind.lib ui_Finger.h ui_Login.h ui_Setting.h ui_addlock.h ui_dialog.h ui_getlock.h ui_mainwindow.h $(OBJECTS) debug\FingerMSVC_resource.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-debug\Finger.obj debug\Login.obj debug\Setting.obj debug\dialog.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_dialog.obj debug\moc_mainwindow.obj
+debug\Finger.obj debug\Login.obj debug\Setting.obj debug\addlock.obj debug\dialog.obj debug\getlock.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_addlock.obj debug\moc_dialog.obj debug\moc_getlock.obj debug\moc_mainwindow.obj
 $(LIBS)
 <<
+
+debug\FingerMSVC_resource.res: FingerMSVC_resource.rc
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\FingerMSVC_resource.res FingerMSVC_resource.rc
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\FingerMSVC.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -171,11 +186,12 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) FingerMSVC.zip $(SOURCES) $(DIST) ..\..\..\..\FingerMSVC.pro G:\Qt\5.15.2\msvc2019\mkspecs\features\spec_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\angle.conf G:\Qt\5.15.2\msvc2019\mkspecs\common\windows-desktop.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\windows_vulkan_sdk.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\windows-vulkan.conf G:\Qt\5.15.2\msvc2019\mkspecs\common\msvc-desktop.conf G:\Qt\5.15.2\msvc2019\mkspecs\qconfig.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3danimation.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3danimation_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dcore.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dcore_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dinput.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dinput_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dlogic.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dlogic_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickanimation.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickanimation_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickinput.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickinput_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickrender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickrender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickscene2d.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickscene2d_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3drender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3drender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_accessibility_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axbase.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axbase_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axcontainer.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axcontainer_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axserver.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axserver_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bluetooth.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bluetooth_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bodymovin_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bootstrap_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_charts.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_charts_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_concurrent.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_concurrent_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_core.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_core_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_datavisualization.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_datavisualization_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_dbus.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_dbus_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designer.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designer_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designercomponents_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_devicediscovery_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_edid_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_egl_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_fb_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_fontdatabase_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gamepad.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gamepad_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gui.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gui_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_help.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_help_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttracker.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttracker_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttrackerqml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttrackerqml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_location.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_location_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimedia.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimedia_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimediawidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimediawidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_network.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_network_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_networkauth.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_networkauth_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_nfc.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_nfc_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_opengl.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_opengl_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_openglextensions.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_openglextensions_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_packetprotocol_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_platformcompositor_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioning.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioning_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioningquick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioningquick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_printsupport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_printsupport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_purchasing.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_purchasing_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmldebug_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmldevtools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlmodels.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlmodels_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmltest.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmltest_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlworkerscript.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlworkerscript_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3d.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3d_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dassetimport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dassetimport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3drender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3drender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3druntimerender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3druntimerender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dutils.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dutils_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickcontrols2.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickcontrols2_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickparticles_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickshapes_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quicktemplates2.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quicktemplates2_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickwidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickwidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_remoteobjects.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_remoteobjects_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_repparser.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_repparser_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_script.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_script_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scripttools.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scripttools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scxml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scxml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sensors.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sensors_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialbus.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialbus_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sql.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sql_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_svg.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_svg_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_testlib.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_testlib_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_texttospeech.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_texttospeech_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_theme_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uiplugin.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uitools.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uitools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_virtualkeyboard.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_virtualkeyboard_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_vulkan_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webchannel.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webchannel_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webengine.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webengine_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecore.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecore_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginewidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginewidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_websockets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_websockets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webview.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webview_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_widgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_widgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_winextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_winextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xmlpatterns.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xmlpatterns_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_zlib_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\features\qt_functions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qt_config.prf G:\Qt\5.15.2\msvc2019\mkspecs\win32-msvc\qmake.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\spec_post.prf .qmake.stash G:\Qt\5.15.2\msvc2019\mkspecs\features\exclusive_builds.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\msvc-version.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\toolchain.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\default_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\default_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resolve_config.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\exclusive_builds_post.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\default_post.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\build_pass.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qml_debug.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\precompile_header.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\warn_on.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qt.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resources_functions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resources.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\moc.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\opengl.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\uic.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qmake_use.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\file_copies.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\windows.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\testcase_targets.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\exceptions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\yacc.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\lex.prf ..\..\FingerMSVC.pro ..\..\icon\icon.qrc G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.prl G:\Qt\5.15.2\msvc2019\lib\qtmaind.prl   ..\..\icon\icon.qrc G:\Qt\5.15.2\msvc2019\mkspecs\features\data\dummy.cpp ..\..\FPModule_SDK.h ..\..\Finger.h ..\..\Login.h ..\..\Setting.h ..\..\dialog.h ..\..\mainwindow.h  ..\..\Finger.cpp ..\..\Login.cpp ..\..\Setting.cpp ..\..\dialog.cpp ..\..\main.cpp ..\..\mainwindow.cpp ..\..\Finger.ui ..\..\Login.ui ..\..\Setting.ui ..\..\dialog.ui ..\..\mainwindow.ui    
+	$(ZIP) FingerMSVC.zip $(SOURCES) $(DIST) ..\..\..\..\FingerMSVC.pro G:\Qt\5.15.2\msvc2019\mkspecs\features\spec_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\angle.conf G:\Qt\5.15.2\msvc2019\mkspecs\common\windows-desktop.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\windows_vulkan_sdk.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\windows-vulkan.conf G:\Qt\5.15.2\msvc2019\mkspecs\common\msvc-desktop.conf G:\Qt\5.15.2\msvc2019\mkspecs\qconfig.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3danimation.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3danimation_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dcore.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dcore_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dinput.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dinput_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dlogic.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dlogic_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickanimation.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickanimation_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickinput.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickinput_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickrender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickrender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickscene2d.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3dquickscene2d_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3drender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_3drender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_accessibility_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axbase.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axbase_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axcontainer.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axcontainer_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axserver.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_axserver_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bluetooth.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bluetooth_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bodymovin_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_bootstrap_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_charts.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_charts_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_concurrent.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_concurrent_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_core.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_core_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_datavisualization.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_datavisualization_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_dbus.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_dbus_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designer.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designer_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_designercomponents_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_devicediscovery_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_edid_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_egl_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_fb_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_fontdatabase_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gamepad.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gamepad_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gui.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_gui_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_help.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_help_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttracker.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttracker_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttrackerqml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_insighttrackerqml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_location.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_location_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimedia.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimedia_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimediawidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_multimediawidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_network.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_network_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_networkauth.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_networkauth_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_nfc.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_nfc_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_opengl.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_opengl_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_openglextensions.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_openglextensions_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_packetprotocol_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_platformcompositor_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioning.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioning_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioningquick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_positioningquick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_printsupport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_printsupport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_purchasing.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_purchasing_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmldebug_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmldevtools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlmodels.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlmodels_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmltest.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmltest_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlworkerscript.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qmlworkerscript_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3d.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3d_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dassetimport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dassetimport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3drender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3drender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3druntimerender.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3druntimerender_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dutils.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick3dutils_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quick_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickcontrols2.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickcontrols2_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickparticles_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickshapes_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quicktemplates2.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quicktemplates2_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickwidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_quickwidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_remoteobjects.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_remoteobjects_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_repparser.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_repparser_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_script.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_script_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scripttools.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scripttools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scxml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_scxml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sensors.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sensors_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialbus.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialbus_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialport.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_serialport_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sql.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_sql_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_svg.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_svg_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_testlib.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_testlib_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_texttospeech.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_texttospeech_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_theme_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uiplugin.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uitools.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_uitools_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_virtualkeyboard.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_virtualkeyboard_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_vulkan_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webchannel.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webchannel_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webengine.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webengine_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecore.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecore_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginewidgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webenginewidgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_websockets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_websockets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webview.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_webview_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_widgets.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_widgets_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_winextras.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_winextras_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xml.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xml_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xmlpatterns.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_xmlpatterns_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\modules\qt_lib_zlib_private.pri G:\Qt\5.15.2\msvc2019\mkspecs\features\qt_functions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qt_config.prf G:\Qt\5.15.2\msvc2019\mkspecs\win32-msvc\qmake.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\spec_post.prf .qmake.stash G:\Qt\5.15.2\msvc2019\mkspecs\features\exclusive_builds.prf G:\Qt\5.15.2\msvc2019\mkspecs\common\msvc-version.conf G:\Qt\5.15.2\msvc2019\mkspecs\features\toolchain.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\default_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\default_pre.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resolve_config.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\exclusive_builds_post.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\default_post.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\build_pass.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qml_debug.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\precompile_header.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\warn_on.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qt.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resources_functions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\resources.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\moc.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\opengl.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\uic.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\qmake_use.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\file_copies.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\win32\windows.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\testcase_targets.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\exceptions.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\yacc.prf G:\Qt\5.15.2\msvc2019\mkspecs\features\lex.prf ..\..\FingerMSVC.pro ..\..\icon\icon.qrc G:\Qt\5.15.2\msvc2019\lib\Qt5Widgetsd.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Guid.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Networkd.prl G:\Qt\5.15.2\msvc2019\lib\Qt5Cored.prl G:\Qt\5.15.2\msvc2019\lib\qtmaind.prl   ..\..\icon\icon.qrc G:\Qt\5.15.2\msvc2019\mkspecs\features\data\dummy.cpp ..\..\FPModule_SDK.h ..\..\Finger.h ..\..\Login.h ..\..\Setting.h ..\..\addlock.h ..\..\dialog.h ..\..\getlock.h ..\..\mainwindow.h  ..\..\Finger.cpp ..\..\Login.cpp ..\..\Setting.cpp ..\..\addlock.cpp ..\..\dialog.cpp ..\..\getlock.cpp ..\..\main.cpp ..\..\mainwindow.cpp ..\..\Finger.ui ..\..\Login.ui ..\..\Setting.ui ..\..\addlock.ui ..\..\dialog.ui ..\..\getlock.ui ..\..\mainwindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\Finger.obj debug\Login.obj debug\Setting.obj debug\dialog.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_dialog.obj debug\moc_mainwindow.obj
+	-$(DEL_FILE) debug\Finger.obj debug\Login.obj debug\Setting.obj debug\addlock.obj debug\dialog.obj debug\getlock.obj debug\main.obj debug\mainwindow.obj debug\qrc_icon.obj debug\moc_Finger.obj debug\moc_Login.obj debug\moc_Setting.obj debug\moc_addlock.obj debug\moc_dialog.obj debug\moc_getlock.obj debug\moc_mainwindow.obj
 	-$(DEL_FILE) debug\FingerMSVC.vc.pdb debug\FingerMSVC.ilk debug\FingerMSVC.idb
+	-$(DEL_FILE) debug\FingerMSVC_resource.res
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\FingerMSVC.pdb
@@ -197,10 +213,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_icon.cpp
 debug\qrc_icon.cpp: ..\..\icon\icon.qrc \
 		G:\Qt\5.15.2\msvc2019\bin\rcc.exe \
+		..\..\icon\ico.png \
 		..\..\icon\weixiao.png \
 		..\..\icon\sangangy.png \
-		..\..\icon\suo.png \
-		..\..\icon\????_20240728123250.png
+		..\..\icon\suo.png
 	G:\Qt\5.15.2\msvc2019\bin\rcc.exe -name icon ..\..\icon\icon.qrc -o debug\qrc_icon.cpp
 
 compiler_moc_predefs_make_all: debug\moc_predefs.h
@@ -209,9 +225,9 @@ compiler_moc_predefs_clean:
 debug\moc_predefs.h: G:\Qt\5.15.2\msvc2019\mkspecs\features\data\dummy.cpp
 	cl -BxG:\Qt\5.15.2\msvc2019\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus /utf-8 -Zi -MDd -std:c++17 -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E G:\Qt\5.15.2\msvc2019\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h
 
-compiler_moc_header_make_all: debug\moc_Finger.cpp debug\moc_Login.cpp debug\moc_Setting.cpp debug\moc_dialog.cpp debug\moc_mainwindow.cpp
+compiler_moc_header_make_all: debug\moc_Finger.cpp debug\moc_Login.cpp debug\moc_Setting.cpp debug\moc_addlock.cpp debug\moc_dialog.cpp debug\moc_getlock.cpp debug\moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_Finger.cpp debug\moc_Login.cpp debug\moc_Setting.cpp debug\moc_dialog.cpp debug\moc_mainwindow.cpp
+	-$(DEL_FILE) debug\moc_Finger.cpp debug\moc_Login.cpp debug\moc_Setting.cpp debug\moc_addlock.cpp debug\moc_dialog.cpp debug\moc_getlock.cpp debug\moc_mainwindow.cpp
 debug\moc_Finger.cpp: ..\..\Finger.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
@@ -521,6 +537,8 @@ debug\moc_Login.cpp: ..\..\Login.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDateTime \
+		..\..\getlock.h \
+		..\..\addlock.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QAction \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qaction.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qactiongroup.h \
@@ -636,6 +654,155 @@ debug\moc_Setting.cpp: ..\..\Setting.h \
 		G:\Qt\5.15.2\msvc2019\bin\moc.exe
 	G:\Qt\5.15.2\msvc2019\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include F:/WangLingZhi/FingerMSVC/build/Desktop_Qt_5_15_2_MSVC2019_32bit-Debug/debug/moc_predefs.h -IG:/Qt/5.15.2/msvc2019/mkspecs/win32-msvc -IF:/WangLingZhi/FingerMSVC -IF:/WangLingZhi/FingerMSVC -IG:/Qt/5.15.2/msvc2019/include -IG:/Qt/5.15.2/msvc2019/include/QtWidgets -IG:/Qt/5.15.2/msvc2019/include/QtGui -IG:/Qt/5.15.2/msvc2019/include/QtANGLE -IG:/Qt/5.15.2/msvc2019/include/QtNetwork -IG:/Qt/5.15.2/msvc2019/include/QtCore -I. -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt" ..\..\Setting.h -o debug\moc_Setting.cpp
 
+debug\moc_addlock.cpp: ..\..\addlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgetsglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtguiglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig-bootstrapped.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtcore-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsystemdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qprocessordetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcompilerdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtypeinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsysinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlogging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qflags.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbasicatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_bootstrap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qgenericatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_cxx11.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_msvc.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobalstatic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmutex.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnumeric.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qversiontagging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtgui-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgets-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnamespace.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs_win.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstring.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qchar.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrefcount.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qarraydata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringliteral.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringbuilder.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiterator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhashfunctions.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpair.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvector.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainertools_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpoint.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearraylist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregexp.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringmatcher.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qscopedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmetatype.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvarlengtharray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainerfwd.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmargins.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpaintdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrect.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsize.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpalette.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcolor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgb.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgba64.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qbrush.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qmatrix.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpolygon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qregion.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatastream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiodevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qline.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtransform.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qimage.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixelformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qshareddata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfont.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontmetrics.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qsizepolicy.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qkeysequence.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvariant.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdebug.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtextstream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlocale.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qset.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontiguouscache.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurlquery.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfile.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfiledevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkAccessManager \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkaccessmanager.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetworkglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetwork-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkrequest.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QSharedDataPointer \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QString \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QUrl \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVector \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QObject \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslConfiguration \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslconfiguration.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtcpsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qabstractsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslerror.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslcertificate.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcryptographichash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatetime.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qssl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QFlags \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslPreSharedKeyAuthenticator \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslpresharedkeyauthenticator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QMetaType \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonDocument \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsondocument.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborcommon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregularexpression.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\quuid.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonObject \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkReply \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkreply.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QIODevice \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkRequest \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonArray \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonarray.h \
+		debug\moc_predefs.h \
+		G:\Qt\5.15.2\msvc2019\bin\moc.exe
+	G:\Qt\5.15.2\msvc2019\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include F:/WangLingZhi/FingerMSVC/build/Desktop_Qt_5_15_2_MSVC2019_32bit-Debug/debug/moc_predefs.h -IG:/Qt/5.15.2/msvc2019/mkspecs/win32-msvc -IF:/WangLingZhi/FingerMSVC -IF:/WangLingZhi/FingerMSVC -IG:/Qt/5.15.2/msvc2019/include -IG:/Qt/5.15.2/msvc2019/include/QtWidgets -IG:/Qt/5.15.2/msvc2019/include/QtGui -IG:/Qt/5.15.2/msvc2019/include/QtANGLE -IG:/Qt/5.15.2/msvc2019/include/QtNetwork -IG:/Qt/5.15.2/msvc2019/include/QtCore -I. -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt" ..\..\addlock.h -o debug\moc_addlock.cpp
+
 debug\moc_dialog.cpp: ..\..\dialog.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
@@ -744,6 +911,156 @@ debug\moc_dialog.cpp: ..\..\dialog.h \
 		debug\moc_predefs.h \
 		G:\Qt\5.15.2\msvc2019\bin\moc.exe
 	G:\Qt\5.15.2\msvc2019\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include F:/WangLingZhi/FingerMSVC/build/Desktop_Qt_5_15_2_MSVC2019_32bit-Debug/debug/moc_predefs.h -IG:/Qt/5.15.2/msvc2019/mkspecs/win32-msvc -IF:/WangLingZhi/FingerMSVC -IF:/WangLingZhi/FingerMSVC -IG:/Qt/5.15.2/msvc2019/include -IG:/Qt/5.15.2/msvc2019/include/QtWidgets -IG:/Qt/5.15.2/msvc2019/include/QtGui -IG:/Qt/5.15.2/msvc2019/include/QtANGLE -IG:/Qt/5.15.2/msvc2019/include/QtNetwork -IG:/Qt/5.15.2/msvc2019/include/QtCore -I. -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt" ..\..\dialog.h -o debug\moc_dialog.cpp
+
+debug\moc_getlock.cpp: ..\..\getlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgetsglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtguiglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig-bootstrapped.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtcore-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsystemdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qprocessordetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcompilerdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtypeinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsysinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlogging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qflags.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbasicatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_bootstrap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qgenericatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_cxx11.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_msvc.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobalstatic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmutex.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnumeric.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qversiontagging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtgui-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgets-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnamespace.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs_win.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstring.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qchar.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrefcount.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qarraydata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringliteral.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringbuilder.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiterator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhashfunctions.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpair.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvector.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainertools_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpoint.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearraylist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregexp.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringmatcher.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qscopedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmetatype.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvarlengtharray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainerfwd.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmargins.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpaintdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrect.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsize.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpalette.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcolor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgb.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgba64.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qbrush.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qmatrix.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpolygon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qregion.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatastream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiodevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qline.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtransform.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qimage.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixelformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qshareddata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfont.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontmetrics.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qsizepolicy.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qkeysequence.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvariant.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdebug.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtextstream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlocale.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qset.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontiguouscache.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurlquery.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfile.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfiledevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkAccessManager \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkaccessmanager.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetworkglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetwork-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkrequest.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QSharedDataPointer \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QString \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QUrl \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVector \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QObject \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslConfiguration \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslconfiguration.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtcpsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qabstractsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslerror.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslcertificate.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcryptographichash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatetime.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qssl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QFlags \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslPreSharedKeyAuthenticator \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslpresharedkeyauthenticator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QMetaType \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonDocument \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsondocument.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborcommon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregularexpression.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\quuid.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonObject \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkReply \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkreply.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QIODevice \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkRequest \
+		..\..\addlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonArray \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonarray.h \
+		debug\moc_predefs.h \
+		G:\Qt\5.15.2\msvc2019\bin\moc.exe
+	G:\Qt\5.15.2\msvc2019\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include F:/WangLingZhi/FingerMSVC/build/Desktop_Qt_5_15_2_MSVC2019_32bit-Debug/debug/moc_predefs.h -IG:/Qt/5.15.2/msvc2019/mkspecs/win32-msvc -IF:/WangLingZhi/FingerMSVC -IF:/WangLingZhi/FingerMSVC -IG:/Qt/5.15.2/msvc2019/include -IG:/Qt/5.15.2/msvc2019/include/QtWidgets -IG:/Qt/5.15.2/msvc2019/include/QtGui -IG:/Qt/5.15.2/msvc2019/include/QtANGLE -IG:/Qt/5.15.2/msvc2019/include/QtNetwork -IG:/Qt/5.15.2/msvc2019/include/QtCore -I. -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt" ..\..\getlock.h -o debug\moc_getlock.cpp
 
 debug\moc_mainwindow.cpp: ..\..\mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMainWindow \
@@ -899,6 +1216,8 @@ debug\moc_mainwindow.cpp: ..\..\mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDateTime \
+		..\..\getlock.h \
+		..\..\addlock.h \
 		debug\moc_predefs.h \
 		G:\Qt\5.15.2\msvc2019\bin\moc.exe
 	G:\Qt\5.15.2\msvc2019\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include F:/WangLingZhi/FingerMSVC/build/Desktop_Qt_5_15_2_MSVC2019_32bit-Debug/debug/moc_predefs.h -IG:/Qt/5.15.2/msvc2019/mkspecs/win32-msvc -IF:/WangLingZhi/FingerMSVC -IF:/WangLingZhi/FingerMSVC -IG:/Qt/5.15.2/msvc2019/include -IG:/Qt/5.15.2/msvc2019/include/QtWidgets -IG:/Qt/5.15.2/msvc2019/include/QtGui -IG:/Qt/5.15.2/msvc2019/include/QtANGLE -IG:/Qt/5.15.2/msvc2019/include/QtNetwork -IG:/Qt/5.15.2/msvc2019/include/QtCore -I. -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" -I"G:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt" ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -907,9 +1226,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_Finger.h ui_Login.h ui_Setting.h ui_dialog.h ui_mainwindow.h
+compiler_uic_make_all: ui_Finger.h ui_Login.h ui_Setting.h ui_addlock.h ui_dialog.h ui_getlock.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Finger.h ui_Login.h ui_Setting.h ui_dialog.h ui_mainwindow.h
+	-$(DEL_FILE) ui_Finger.h ui_Login.h ui_Setting.h ui_addlock.h ui_dialog.h ui_getlock.h ui_mainwindow.h
 ui_Finger.h: ..\..\Finger.ui \
 		G:\Qt\5.15.2\msvc2019\bin\uic.exe
 	G:\Qt\5.15.2\msvc2019\bin\uic.exe ..\..\Finger.ui -o ui_Finger.h
@@ -922,9 +1241,17 @@ ui_Setting.h: ..\..\Setting.ui \
 		G:\Qt\5.15.2\msvc2019\bin\uic.exe
 	G:\Qt\5.15.2\msvc2019\bin\uic.exe ..\..\Setting.ui -o ui_Setting.h
 
+ui_addlock.h: ..\..\addlock.ui \
+		G:\Qt\5.15.2\msvc2019\bin\uic.exe
+	G:\Qt\5.15.2\msvc2019\bin\uic.exe ..\..\addlock.ui -o ui_addlock.h
+
 ui_dialog.h: ..\..\dialog.ui \
 		G:\Qt\5.15.2\msvc2019\bin\uic.exe
 	G:\Qt\5.15.2\msvc2019\bin\uic.exe ..\..\dialog.ui -o ui_dialog.h
+
+ui_getlock.h: ..\..\getlock.ui \
+		G:\Qt\5.15.2\msvc2019\bin\uic.exe
+	G:\Qt\5.15.2\msvc2019\bin\uic.exe ..\..\getlock.ui -o ui_getlock.h
 
 ui_mainwindow.h: ..\..\mainwindow.ui \
 		G:\Qt\5.15.2\msvc2019\bin\uic.exe
@@ -1295,6 +1622,8 @@ debug\Login.obj: ..\..\Login.cpp ..\..\Login.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDateTime \
+		..\..\getlock.h \
+		..\..\addlock.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QAction \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qaction.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qactiongroup.h \
@@ -1433,7 +1762,205 @@ debug\Setting.obj: ..\..\Setting.cpp ..\..\Setting.h \
 		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
 		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
 		ui_Setting.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\QIcon \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qicon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QApplication \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qeventloop.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdesktopwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qguiapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qinputmethod.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QGridLayout \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qgridlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayoutitem.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qboxlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLabel \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlabel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qframe.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLineEdit \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlineedit.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpen.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtextoption.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QPushButton \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qpushbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QSpacerItem \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\qsettings.h
+
+debug\addlock.obj: ..\..\addlock.cpp ..\..\addlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgetsglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtguiglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig-bootstrapped.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtcore-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsystemdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qprocessordetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcompilerdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtypeinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsysinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlogging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qflags.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbasicatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_bootstrap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qgenericatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_cxx11.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_msvc.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobalstatic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmutex.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnumeric.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qversiontagging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtgui-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgets-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnamespace.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs_win.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstring.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qchar.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrefcount.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qarraydata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringliteral.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringbuilder.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiterator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhashfunctions.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpair.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvector.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainertools_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpoint.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearraylist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregexp.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringmatcher.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qscopedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmetatype.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvarlengtharray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainerfwd.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmargins.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpaintdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrect.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsize.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpalette.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcolor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgb.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgba64.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qbrush.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qmatrix.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpolygon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qregion.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatastream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiodevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qline.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtransform.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qimage.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixelformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qshareddata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfont.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontmetrics.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qsizepolicy.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qkeysequence.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvariant.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdebug.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtextstream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlocale.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qset.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontiguouscache.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurlquery.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfile.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfiledevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkAccessManager \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkaccessmanager.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetworkglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetwork-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkrequest.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QSharedDataPointer \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QString \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QUrl \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVector \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QObject \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslConfiguration \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslconfiguration.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtcpsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qabstractsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslerror.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslcertificate.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcryptographichash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatetime.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qssl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QFlags \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslPreSharedKeyAuthenticator \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslpresharedkeyauthenticator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QMetaType \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonDocument \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsondocument.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborcommon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregularexpression.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\quuid.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonObject \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkReply \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkreply.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QIODevice \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkRequest \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonArray \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonarray.h \
+		ui_addlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QApplication \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qeventloop.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdesktopwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qguiapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qinputmethod.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QGridLayout \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qgridlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayoutitem.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qboxlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLabel \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlabel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qframe.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QPushButton \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qpushbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qicon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QSpacerItem \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QWidget \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h
 
 debug\dialog.obj: ..\..\dialog.cpp ..\..\dialog.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
@@ -1562,6 +2089,196 @@ debug\dialog.obj: ..\..\dialog.cpp ..\..\dialog.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QPushButton \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qpushbutton.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractbutton.h
+
+debug\getlock.obj: ..\..\getlock.cpp ..\..\getlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QDialog \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdialog.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgetsglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtguiglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig-bootstrapped.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qconfig.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtcore-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsystemdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qprocessordetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcompilerdetection.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtypeinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsysinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlogging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qflags.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbasicatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_bootstrap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qgenericatomic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_cxx11.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qatomic_msvc.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qglobalstatic.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmutex.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnumeric.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qversiontagging.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtgui-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtwidgets-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qnamespace.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobjectdefs_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qwindowdefs_win.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstring.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qchar.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrefcount.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qarraydata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringliteral.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringbuilder.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qalgorithms.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiterator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhashfunctions.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpair.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvector.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainertools_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qpoint.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qbytearraylist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringlist.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregexp.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qstringmatcher.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qscopedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmetatype.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvarlengtharray.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontainerfwd.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qobject_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmargins.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpaintdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qrect.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsize.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpalette.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcolor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgb.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qrgba64.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qbrush.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qmatrix.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpolygon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qregion.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatastream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qiodevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qline.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtransform.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qimage.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixelformat.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qpixmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qshareddata.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qhash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qsharedpointer_impl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfont.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontmetrics.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qfontinfo.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qsizepolicy.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qcursor.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qkeysequence.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qevent.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qvariant.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qmap.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdebug.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qtextstream.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qlocale.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qset.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcontiguouscache.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qurlquery.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfile.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qfiledevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qvector2d.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qtouchdevice.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkAccessManager \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkaccessmanager.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetworkglobal.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtnetwork-config.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkrequest.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QSharedDataPointer \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QString \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QUrl \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVariant \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QVector \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QObject \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslConfiguration \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslconfiguration.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qtcpsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qabstractsocket.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslerror.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslcertificate.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcryptographichash.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qdatetime.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qssl.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QFlags \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QSslPreSharedKeyAuthenticator \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qsslpresharedkeyauthenticator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QMetaType \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonDocument \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsondocument.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborvalue.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcborcommon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qregularexpression.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\quuid.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonObject \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonobject.h \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkReply \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\qnetworkreply.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QIODevice \
+		G:\Qt\5.15.2\msvc2019\include\QtNetwork\QNetworkRequest \
+		..\..\addlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\QJsonArray \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qjsonarray.h \
+		ui_getlock.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QApplication \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qcoreapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qeventloop.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qdesktopwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qguiapplication.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qinputmethod.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QGridLayout \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qgridlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlayoutitem.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qboxlayout.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QHeaderView \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qheaderview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractitemview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractscrollarea.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qframe.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qabstractitemmodel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtCore\qitemselectionmodel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractitemdelegate.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qstyleoption.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractspinbox.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qvalidator.h \
+		G:\Qt\5.15.2\msvc2019\include\QtGui\qicon.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qslider.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractslider.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qstyle.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtabbar.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtabwidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qrubberband.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QLabel \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qlabel.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QPushButton \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qpushbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qabstractbutton.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QSpacerItem \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QTableWidget \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtablewidget.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qtableview.h \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QWidget \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
+		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h
 
 debug\main.obj: ..\..\main.cpp ..\..\mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMainWindow \
@@ -1717,6 +2434,8 @@ debug\main.obj: ..\..\main.cpp ..\..\mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDateTime \
+		..\..\getlock.h \
+		..\..\addlock.h \
 		..\..\Login.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDebug \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QAction \
@@ -1885,6 +2604,8 @@ debug\mainwindow.obj: ..\..\mainwindow.cpp ..\..\mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QMessageBox \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\qmessagebox.h \
 		G:\Qt\5.15.2\msvc2019\include\QtCore\QDateTime \
+		..\..\getlock.h \
+		..\..\addlock.h \
 		ui_mainwindow.h \
 		G:\Qt\5.15.2\msvc2019\include\QtGui\QIcon \
 		G:\Qt\5.15.2\msvc2019\include\QtWidgets\QApplication \
@@ -1946,7 +2667,11 @@ debug\moc_Login.obj: debug\moc_Login.cpp
 
 debug\moc_Setting.obj: debug\moc_Setting.cpp 
 
+debug\moc_addlock.obj: debug\moc_addlock.cpp 
+
 debug\moc_dialog.obj: debug\moc_dialog.cpp 
+
+debug\moc_getlock.obj: debug\moc_getlock.cpp 
 
 debug\moc_mainwindow.obj: debug\moc_mainwindow.cpp 
 

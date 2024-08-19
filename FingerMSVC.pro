@@ -6,6 +6,9 @@ CONFIG += c++17 utf8
 
 DEFINES += _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 
+RC_ICONS = F:\WangLingZhi\FingerMSVC\icon\ico.ico
+
+
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -19,7 +22,9 @@ SOURCES += \
     Finger.cpp \
     Login.cpp \
     Setting.cpp \
+    addlock.cpp \
     dialog.cpp \
+    getlock.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -28,14 +33,18 @@ HEADERS += \
     Finger.h \
     Login.h \
     Setting.h \
+    addlock.h \
     dialog.h \
+    getlock.h \
     mainwindow.h
 
 FORMS += \
     Finger.ui \
     Login.ui \
     Setting.ui \
+    addlock.ui \
     dialog.ui \
+    getlock.ui \
     mainwindow.ui
 
 # Default rules for deployment.
