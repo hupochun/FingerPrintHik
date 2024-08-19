@@ -6,13 +6,18 @@ extern QString Token;
 int PageNum=1;
 extern QString UserID;
 extern QString IPAddress;
+extern QString UserName;
+extern QString DeptID;
+extern QString DeptName;
+extern QVector<QString> GetDeptID;
+extern QVector<QString> GetUserName;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setWindowTitle("指纹录入工具");
-
+    m_GetLock=NULL;
     networkManager = new QNetworkAccessManager(this);
     QUrl url(IPAddress+"/system/user/dynamicList?pageNum=1&pageSize=30&sortField=&sortType=");
     QNetworkRequest request(url);
@@ -86,7 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
         QTableWidgetItem *deptNameItem = new QTableWidgetItem(dataObject.value("deptName").toString());
         QTableWidgetItem *LoginNameItem = new QTableWidgetItem(dataObject.value("certificateNo").toString());
         QTableWidgetItem *RoleNamesItem = new QTableWidgetItem(dataObject.value("roleNames").toString());
-
+        GetUserName.append(dataObject.value("userName").toString());
+        GetDeptID.append(QString::number(dataObject.value("deptId").toInt()));
         ui->tableWidget->setItem(i, 0, userIdItem);   // userId
          ui->tableWidget->setItem(i, 1, LoginNameItem);   // LoginName
         ui->tableWidget->setItem(i, 2, nickNameItem); // nickName
@@ -114,6 +120,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_3_released()
 {
+    GetDeptID.clear();
+    GetUserName.clear();
     QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=1&pageSize=30&nickName=%1&sortField=&sortType=").arg(ui->lineEdit->text()));
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -182,7 +190,8 @@ void MainWindow::on_pushButton_3_released()
             QTableWidgetItem *deptNameItem = new QTableWidgetItem(dataObject.value("deptName").toString());
             QTableWidgetItem *LoginNameItem = new QTableWidgetItem(dataObject.value("certificateNo").toString());
             QTableWidgetItem *RoleNamesItem = new QTableWidgetItem(dataObject.value("roleNames").toString());
-
+            GetUserName.append(dataObject.value("userName").toString());
+            GetDeptID.append(QString::number(dataObject.value("deptId").toInt()));
             ui->tableWidget->setItem(i, 0, userIdItem);   // userId
             ui->tableWidget->setItem(i, 1, LoginNameItem);   // LoginName
             ui->tableWidget->setItem(i, 2, nickNameItem); // nickName
@@ -203,9 +212,12 @@ void MainWindow::on_pushButton_3_released()
 
 void MainWindow::on_pushButton_4_released()
 {
+
     if(PageNum==30)
         return;
     PageNum++;
+    GetDeptID.clear();
+    GetUserName.clear();
     ui->lineEdit_2->setText(QString::number(PageNum));
     QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
@@ -275,7 +287,8 @@ void MainWindow::on_pushButton_4_released()
             QTableWidgetItem *deptNameItem = new QTableWidgetItem(dataObject.value("deptName").toString());
             QTableWidgetItem *LoginNameItem = new QTableWidgetItem(dataObject.value("certificateNo").toString());
             QTableWidgetItem *RoleNamesItem = new QTableWidgetItem(dataObject.value("roleNames").toString());
-
+            GetUserName.append(dataObject.value("userName").toString());
+            GetDeptID.append(QString::number(dataObject.value("deptId").toInt()));
             ui->tableWidget->setItem(i, 0, userIdItem);   // userId
             ui->tableWidget->setItem(i, 1, LoginNameItem);   // LoginName
             ui->tableWidget->setItem(i, 2, nickNameItem); // nickName
@@ -295,9 +308,12 @@ void MainWindow::on_pushButton_4_released()
 
 void MainWindow::on_pushButton_5_released()
 {
+
     if(PageNum==1)
         return;
     PageNum--;
+    GetDeptID.clear();
+    GetUserName.clear();
     ui->lineEdit_2->setText(QString::number(PageNum));
     QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
@@ -367,7 +383,8 @@ void MainWindow::on_pushButton_5_released()
             QTableWidgetItem *deptNameItem = new QTableWidgetItem(dataObject.value("deptName").toString());
             QTableWidgetItem *LoginNameItem = new QTableWidgetItem(dataObject.value("certificateNo").toString());
             QTableWidgetItem *RoleNamesItem = new QTableWidgetItem(dataObject.value("roleNames").toString());
-
+            GetDeptID.append(QString::number(dataObject.value("deptId").toInt()));
+            GetUserName.append(dataObject.value("userName").toString());
             ui->tableWidget->setItem(i, 0, userIdItem);   // userId
             ui->tableWidget->setItem(i, 1, LoginNameItem);   // LoginName
             ui->tableWidget->setItem(i, 2, nickNameItem); // nickName
@@ -396,7 +413,7 @@ void MainWindow::on_pushButton_6_released()
         Finger* FingerWidget= new Finger(this);
         FingerWidget->show();
     } else {
-        QMessageBox::about(nullptr, "提示", "请先选中你要修改的指纹");
+        QMessageBox::about(nullptr, "提示", "请先选中你要修改指纹的人员");
         return;
     }
 
@@ -405,6 +422,8 @@ void MainWindow::on_pushButton_6_released()
 
 void MainWindow::on_pushButton_released()
 {
+    GetDeptID.clear();
+    GetUserName.clear();
     PageNum=ui->lineEdit_2->text().toInt();
     QUrl url(QString(IPAddress+"/system/user/dynamicList?pageNum=%1&pageSize=30&sortField=&sortType=").arg(QString::number(PageNum)));
     QNetworkRequest request(url);
@@ -474,7 +493,8 @@ void MainWindow::on_pushButton_released()
             QTableWidgetItem *deptNameItem = new QTableWidgetItem(dataObject.value("deptName").toString());
             QTableWidgetItem *LoginNameItem = new QTableWidgetItem(dataObject.value("certificateNo").toString());
             QTableWidgetItem *RoleNamesItem = new QTableWidgetItem(dataObject.value("roleNames").toString());
-
+            GetUserName.append(dataObject.value("userName").toString());
+            GetDeptID.append(QString::number(dataObject.value("deptId").toInt()));
             ui->tableWidget->setItem(i, 0, userIdItem);   // userId
             ui->tableWidget->setItem(i, 1, LoginNameItem);   // LoginName
             ui->tableWidget->setItem(i, 2, nickNameItem); // nickName
@@ -490,5 +510,29 @@ void MainWindow::on_pushButton_released()
         // 设置表格为只读
         ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     });
+}
+
+
+void MainWindow::on_pushButton_2_released()
+{
+    QModelIndex currentIndex = ui->tableWidget->currentIndex();
+    if (currentIndex.isValid())
+    {
+        int RowNum=ui->tableWidget->currentItem()->row();
+        UserID=ui->tableWidget->item(RowNum,0)->text();
+        UserName=GetUserName[RowNum];
+        DeptID=GetDeptID[RowNum];
+        DeptName=ui->tableWidget->item(RowNum,5)->text();
+        if(m_GetLock!=NULL)
+            delete m_GetLock;
+        m_GetLock=new GetLock(this);
+        m_GetLock->show();
+    }
+    else
+    {
+        QMessageBox::about(nullptr, "提示", "请先选中你要添加门锁的人员");
+        return;
+    }
+
 }
 

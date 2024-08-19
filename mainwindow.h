@@ -11,6 +11,7 @@
 #include <QJsonArray>
 #include "Finger.h"
 #include <QMessageBox>
+#include "getlock.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -37,10 +38,13 @@ private slots:
 
     void on_pushButton_released();
 
+    void on_pushButton_2_released();
+
 private:
     Ui::MainWindow *ui;
     QNetworkAccessManager *networkManager;
     QNetworkReply *reply;
+    GetLock* m_GetLock;
 
 };
 #endif // MAINWINDOW_H

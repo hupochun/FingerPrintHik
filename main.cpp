@@ -7,7 +7,12 @@ QString Token;
 unsigned char fpTemplate[512];
 QString UserID;
 QMessageBox* msgBox;
-
+QString UserName;
+QString DeptID;
+QString DeptName;
+QVector<QString> GetDeptID;
+QVector<QString> GetUserName;
+QVector<QString> GetLockID;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

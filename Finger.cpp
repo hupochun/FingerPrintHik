@@ -166,19 +166,19 @@ void Finger::on_pushButton_released()
 
         // 3. 将 Base64 编码的 QByteArray 转换为 QString，如果需要的话
         QString hexString = QString::fromUtf8(base64Data);
-            json["personId"] = UserID;
-            QDateTime currentDateTime = QDateTime::currentDateTime();
-            json["fingerprintName"] = currentDateTime.toString();
-            json["fingerprintData"]=hexString;
-            QJsonDocument jsonDoc(json);
-            QByteArray jsonData = jsonDoc.toJson();
-            request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-            request.setRawHeader("Authorization", QString("Bearer %1").arg(Token).toUtf8());
-            qDebug()<<jsonData;
-            reply=networkManager->post(request, jsonData);
-            QObject::connect(reply, &QNetworkReply::finished, [&]() {
+        json["personId"] = UserID;
+        QDateTime currentDateTime = QDateTime::currentDateTime();
+        json["fingerprintName"] = currentDateTime.toString();
+        json["fingerprintData"]=hexString;
+        QJsonDocument jsonDoc(json);
+        QByteArray jsonData = jsonDoc.toJson();
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        request.setRawHeader("Authorization", QString("Bearer %1").arg(Token).toUtf8());
+        qDebug()<<jsonData;
+        reply=networkManager->post(request, jsonData);
+        QObject::connect(reply, &QNetworkReply::finished, [&]() {
             if (reply->error() != QNetworkReply::NoError) {
-                    qDebug() << "Error: " << reply->errorString()<<reply->error();
+                qDebug() << "Error: " << reply->errorString()<<reply->error();
                 QMessageBox::about(nullptr, "提示", "上传失败请检查网络");
                 reply->deleteLater();
                 return;

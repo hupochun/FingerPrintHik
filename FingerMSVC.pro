@@ -22,7 +22,9 @@ SOURCES += \
     Finger.cpp \
     Login.cpp \
     Setting.cpp \
+    addlock.cpp \
     dialog.cpp \
+    getlock.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -31,14 +33,18 @@ HEADERS += \
     Finger.h \
     Login.h \
     Setting.h \
+    addlock.h \
     dialog.h \
+    getlock.h \
     mainwindow.h
 
 FORMS += \
     Finger.ui \
     Login.ui \
     Setting.ui \
+    addlock.ui \
     dialog.ui \
+    getlock.ui \
     mainwindow.ui
 
 # Default rules for deployment.
